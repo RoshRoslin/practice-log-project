@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Student Practice Log</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+    <div class="offset-by-three columns"><h2>Student Practice Log</h2></div>
+    </div>
+  </div>
+  <div class="container">
+    <form id="practice-log-form">
+      <div class="row">
+        <div class="four columns">
+          <label for="practice-input">Practice Subject</label>
+          <input class="u-full-width" type="text" placeholder="C Major Scale" id="practice-subject-input">
+        </div>
+        <div class="four columns">
+          <label for="tempo-input">Tempo</label>
+          <input class="u-full-width" type="number" placeholder="100" id="tempo-input" value = 80>
+        </div>
+        <div class="four columns">
+          <label for="tempo-input">Date</label>
+          <input class="u-full-width" type="date" placeholder="100" id="date-input">
+        </div>
+      </div>
+      <label for="notes-input">Notes to self</label>
+      <textarea class="u-full-width" placeholder="Played the C major scale 10 times" id="notes-input"></textarea>
+
+      <input class="button-primary" type="submit" value="Submit">
+    </form>
+  </div>
+  <div class="container" id="practice-log">
+    <div class="row">
+      <table class="u-full-width table">
+        <thead id="main-table">
+          <tr>
+            <th>Date</th>
+            <th>Subject</th>
+            <th>Tempo </th>
+            <th>Notes</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+      <tbody id="table-body">
+      </tbody>
+    </table>
+  </div>
+
+  </div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="app.js"></script>
+</body>
+</html>
