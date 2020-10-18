@@ -5,7 +5,7 @@ const notes = document.getElementById('notes-input');
 const practiceLog = document.getElementById('practice-log');
 const form = document.getElementById('practice-log-form');
 const tableBody = document.getElementById('table-body');
-
+const logAlert = document.getElementById('submitted--log--alert');
 
 
 
@@ -94,6 +94,8 @@ function addToLog(e){
   //check if table is empty
   checkTableEmpty();
 
+  //log alert to UI for 3 seconds
+  showRemove();
   //resets form after submit
   resetForm();
   //prevents reload on submits
@@ -139,11 +141,9 @@ function convertDataToObject(subjectData, tempoData, dateData, notesData){
 //store in local storage
 
 function storeLogInLocalStorage(log){
-
   let submittedLog;
   console.log(log);
   let jsonObject = JSON.stringify(log);
-
 
   if(localStorage.getItem('log') === null){
     submittedLog = [];
@@ -159,10 +159,18 @@ function storeLogInLocalStorage(log){
   localStorage.setItem('log', JSON.stringify(submittedLog));
 }
 
+//submit log alert
+function showRemove(){
+  logAlert.style.display = 'inline-block';
+  //remove alert after 3 seconds
+  setTimeout(() => {
+    return logAlert.style.display = 'none';
+  }, 3000);
+}
 
+
+//get log from localStorage
 
 //check local storage
-
-//Persist to Local Storage
 
 //Retrieve log from Local Storage
