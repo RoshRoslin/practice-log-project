@@ -37,7 +37,7 @@ checkTableEmpty();
 function loadEventListeners(){
 form.addEventListener('submit', addToLog);
 tableBody.addEventListener('click', removeTask);
-
+getLog();
 
 }
 
@@ -106,6 +106,7 @@ function addToLog(e){
 function removeTask(e) {
   if(e.target.parentElement.classList.contains('delete-item')) {
     e.target.parentElement.parentElement.remove();
+    removeFromLocalStorage(e.target.parentElement.parentElement);
   }
   checkTableEmpty();
 }
@@ -142,7 +143,6 @@ function convertDataToObject(subjectData, tempoData, dateData, notesData){
 
 function storeLogInLocalStorage(log){
   let submittedLog;
-  console.log(log);
   let jsonObject = JSON.stringify(log);
 
   if(localStorage.getItem('log') === null){
@@ -171,6 +171,76 @@ function showRemove(){
 
 //get log from localStorage
 
-//check local storage
+function getLog(){
+  let log;
+  if(localStorage.getItem('log') === null){
+    log = [];
+  } else {
+    log = JSON.parse(localStorage.getItem('log'))
+  }
 
-//Retrieve log from Local Storage
+  for(let i = 0; i < log.length; i++){
+    const subjectData = log[i].subjectData;
+    const dateData = log[i].dateData;
+    const tempoData = log[i].tempoData;
+    const notesData = log[i].notesData;
+
+    //create tr element
+    const tableRow = document.createElement('tr');
+    tableBody.appendChild(tableRow);
+
+    //create td elemnt
+    const tdSubject = document.createElement('td');
+    const tdDate = document.createElement('td');
+    const tdTempo = document.createElement('td');
+    const tdNotes = document.createElement('td');
+
+    // Create text node and append to li
+
+    tdSubject.appendChild(document.createTextNode(subjectData));
+    tdDate.appendChild(document.createTextNode(dateData));
+    tdTempo.appendChild(document.createTextNode(tempoData));
+    tdNotes.appendChild(document.createTextNode(notesData));
+
+    // // Create new link element
+    const link = document.createElement('td');
+    // Add class
+    link.className = 'delete-item secondary-content';
+    // // Add icon html
+    link.innerHTML = '<i class="fa fa-remove"></i>';
+
+     // Append li to ul
+    tableRow.appendChild(tdDate);
+    tableRow.appendChild(tdSubject);
+    tableRow.appendChild(tdTempo);
+    tableRow.appendChild(tdNotes);
+    // // Append the link to li
+    tableRow.appendChild(link);
+
+  }
+
+}
+
+//remove from local storage
+function removeFromLocalStorage(logItem){
+  let log;
+  if(localStorage.getItem('log') === null){
+    log = [];
+  } else {
+    log = JSON.parse(localStorage.getItem('log'))
+  }
+
+  let retrievedLog;
+  for (i = 0; i < log.length; i++){
+    retrievedLog = `${log[i].dateData}${log[i].subjectData}${log[i].tempoData}${log[i].notesData}`;
+    log.forEach(function(element, index){
+      if (logItem.textContent === retrievedLog){
+
+        log.splice(index, 1);
+      }
+    })
+
+  }
+
+  localStorage.setItem('log', JSON.stringify(log));
+}
