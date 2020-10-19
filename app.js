@@ -234,12 +234,11 @@ function removeFromLocalStorage(logItem){
 
   for (i = 0; i < log.length; i++){
     retrievedLog = `${log[i].dateData}${log[i].subjectData}${log[i].tempoData}${log[i].notesData}`;
-    log.forEach(function(element, index){
       if (logItem.textContent === retrievedLog){
 
-        log.splice(index,1);
+        log.splice(i ,1);
       }
-    })
+
 
   }
 
