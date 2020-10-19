@@ -23,7 +23,10 @@ date.value = new Date().toDateInputValue();
 function formatDate(date){
   const splitDate = date.split('-');
   const sliceYear = splitDate[0].slice(2)
-  let formattedDate = `${splitDate[1]}/${splitDate[2]}/${sliceYear}`
+  let formattedDate = `${splitDate[1]}/${splitDate[2]}`
+
+  // mm//yy/date
+  // let formattedDate = `${splitDate[1]}/${splitDate[2]}/${sliceYear}`
 
   return formattedDate;
 }
