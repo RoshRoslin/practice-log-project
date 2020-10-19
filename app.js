@@ -6,6 +6,7 @@ const practiceLog = document.getElementById('practice-log');
 const form = document.getElementById('practice-log-form');
 const tableBody = document.getElementById('table-body');
 const logAlert = document.getElementById('submitted--log--alert');
+const logFail = document.getElementById('empty--log--alert');
 
 
 
@@ -54,55 +55,62 @@ function addToLog(e){
   const tempoData = tempo.value;
   const notesData = notes.value;
 
-  //create tr element
-  const tableRow = document.createElement('tr');
-  tableBody.appendChild(tableRow);
+  if(subjectData === '' || dateData === ''){
+    showRemove();
+    e.preventDefault();
+  } else {
+    //create tr element
+    const tableRow = document.createElement('tr');
+    tableBody.appendChild(tableRow);
 
-  //create td elemnt
-  const tdSubject = document.createElement('td');
-  const tdDate = document.createElement('td');
-  const tdTempo = document.createElement('td');
-  const tdNotes = document.createElement('td');
+    //create td elemnt
+    const tdSubject = document.createElement('td');
+    const tdDate = document.createElement('td');
+    const tdTempo = document.createElement('td');
+    const tdNotes = document.createElement('td');
 
-  // Create text node and append to li
+    // Create text node and append to li
 
-  tdSubject.appendChild(document.createTextNode(subjectData));
-  tdDate.appendChild(document.createTextNode(dateData));
-  tdTempo.appendChild(document.createTextNode(tempoData));
-  tdNotes.appendChild(document.createTextNode(notesData));
+    tdSubject.appendChild(document.createTextNode(subjectData));
+    tdDate.appendChild(document.createTextNode(dateData));
+    tdTempo.appendChild(document.createTextNode(tempoData));
+    tdNotes.appendChild(document.createTextNode(notesData));
 
-  // // Create new link element
-  const link = document.createElement('td');
-  // Add class
-  link.className = 'delete-item secondary-content';
-  // // Add icon html
-  link.innerHTML = '<i class="fa fa-remove"></i>';
+    // // Create new link element
+    const link = document.createElement('td');
+    // Add class
+    link.className = 'delete-item secondary-content';
+    // // Add icon html
+    link.innerHTML = '<i class="fa fa-remove"></i>';
 
-   // Append li to ul
-  tableRow.appendChild(tdDate);
-  tableRow.appendChild(tdSubject);
-  tableRow.appendChild(tdTempo);
-  tableRow.appendChild(tdNotes);
-  // // Append the link to li
-  tableRow.appendChild(link);
+     // Append li to ul
+    tableRow.appendChild(tdDate);
+    tableRow.appendChild(tdSubject);
+    tableRow.appendChild(tdTempo);
+    tableRow.appendChild(tdNotes);
+    // // Append the link to li
+    tableRow.appendChild(link);
 
 
 
-  //convert data to object
-  let logStorage = new convertDataToObject(subjectData,tempoData, dateData, notesData);
+    //convert data to object
+    let logStorage = new convertDataToObject(subjectData,tempoData, dateData, notesData);
 
-  //store in local storage
-  storeLogInLocalStorage(logStorage);
+    //store in local storage
+    storeLogInLocalStorage(logStorage);
 
-  //check if table is empty
-  checkTableEmpty();
+    //check if table is empty
+    checkTableEmpty();
 
-  //log alert to UI for 3 seconds
-  showRemove();
-  //resets form after submit
-  resetForm();
-  //prevents reload on submits
-  e.preventDefault();
+    //log alert to UI for 3 seconds
+    showRemove();
+    //resets form after submit
+    resetForm();
+    //prevents reload on submits
+    e.preventDefault();
+  }
+
+
 }
 
 // Remove Task
@@ -153,23 +161,31 @@ function storeLogInLocalStorage(log){
 
   } else {
     submittedLog = JSON.parse(localStorage.getItem('log'));
-
   }
 
   submittedLog.push(log);
-  console.log(submittedLog);
-
   localStorage.setItem('log', JSON.stringify(submittedLog));
 }
 
-//submit log alert
+//submit log success alert
 function showRemove(){
-  logAlert.style.display = 'inline-block';
-  //remove alert after 3 seconds
-  setTimeout(() => {
-    return logAlert.style.display = 'none';
-  }, 3000);
+  if(subject.value === '' || notes.value === ''){
+    logFail.style.display = 'inline-block';
+    //remove alert after 3 seconds
+    setTimeout(() => {
+      return logFail.style.display = 'none';
+    }, 3000);
+  } else {
+    logAlert.style.display = 'inline-block';
+    //remove alert after 3 seconds
+    setTimeout(() => {
+      return logAlert.style.display = 'none';
+    }, 3000);
+  }
+
 }
+
+
 
 
 //get log from localStorage
