@@ -55,7 +55,7 @@ function addToLog(e){
   const tempoData = tempo.value;
   const notesData = notes.value;
 
-  if(subjectData === '' || dateData === ''){
+  if(subjectData === '' || notesData === ''){
     showRemove();
     e.preventDefault();
   } else {
