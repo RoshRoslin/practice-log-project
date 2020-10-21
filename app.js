@@ -41,7 +41,7 @@ checkTableEmpty();
 function loadEventListeners(){
 form.addEventListener('submit', addToLog);
 tableBody.addEventListener('click', removeTask);
-getLog();
+// getLog();
 
 }
 
@@ -97,7 +97,7 @@ function addToLog(e){
     let logStorage = new convertDataToObject(subjectData,tempoData, dateData, notesData);
 
     //store in local storage
-    storeLogInLocalStorage(logStorage);
+    // storeLogInLocalStorage(logStorage);
 
     //check if table is empty
     checkTableEmpty();
@@ -117,7 +117,7 @@ function addToLog(e){
 function removeTask(e) {
   if(e.target.parentElement.classList.contains('delete-item')) {
     e.target.parentElement.parentElement.remove();
-    removeFromLocalStorage(e.target.parentElement.parentElement);
+    // removeFromLocalStorage(e.target.parentElement.parentElement);
   }
   checkTableEmpty();
 }
@@ -131,7 +131,7 @@ function resetForm(){
 //check if Table is empty
 function checkTableEmpty(){
   let tableLength = document.getElementById('table-body').rows.length;
-
+  console.log(tableLength);
   if (tableLength === 0){
     //show DOM Table
     practiceLog.style.display ='none';
@@ -150,22 +150,22 @@ function convertDataToObject(subjectData, tempoData, dateData, notesData){
   this.notesData = notesData;
 }
 
-//store in local storage
-
-function storeLogInLocalStorage(log){
-  let submittedLog;
-  let jsonObject = JSON.stringify(log);
-
-  if(localStorage.getItem('log') === null){
-    submittedLog = [];
-
-  } else {
-    submittedLog = JSON.parse(localStorage.getItem('log'));
-  }
-
-  submittedLog.push(log);
-  localStorage.setItem('log', JSON.stringify(submittedLog));
-}
+// //store in local storage
+//
+// function storeLogInLocalStorage(log){
+//   let submittedLog;
+//   let jsonObject = JSON.stringify(log);
+//
+//   if(localStorage.getItem('log') === null){
+//     submittedLog = [];
+//
+//   } else {
+//     submittedLog = JSON.parse(localStorage.getItem('log'));
+//   }
+//
+//   submittedLog.push(log);
+//   localStorage.setItem('log', JSON.stringify(submittedLog));
+// }
 
 //submit log success alert
 function showRemove(){
@@ -189,77 +189,77 @@ function showRemove(){
 
 
 //get log from localStorage
+//
+// function getLog(){
+//   let log;
+//   if(localStorage.getItem('log') === null){
+//     log = [];
+//   } else {
+//     log = JSON.parse(localStorage.getItem('log'))
+//   }
+//
+//   for(let i = 0; i < log.length; i++){
+//     const subjectData = log[i].subjectData;
+//     const dateData = log[i].dateData;
+//     const tempoData = log[i].tempoData;
+//     const notesData = log[i].notesData;
+//
+//     //create tr element
+//     const tableRow = document.createElement('tr');
+//     tableBody.appendChild(tableRow);
+//
+//     //create td elemnt
+//     const tdSubject = document.createElement('td');
+//     const tdDate = document.createElement('td');
+//     const tdTempo = document.createElement('td');
+//     const tdNotes = document.createElement('td');
+//
+//     // Create text node and append to li
+//
+//     tdSubject.appendChild(document.createTextNode(subjectData));
+//     tdDate.appendChild(document.createTextNode(dateData));
+//     tdTempo.appendChild(document.createTextNode(tempoData));
+//     tdNotes.appendChild(document.createTextNode(notesData));
+//
+//     // // Create new link element
+//     const link = document.createElement('td');
+//     // Add class
+//     link.className = 'delete-item secondary-content';
+//     // // Add icon html
+//     link.innerHTML = '<i class="fa fa-remove"></i>';
+//
+//      // Append li to ul
+//     tableRow.appendChild(tdDate);
+//     tableRow.appendChild(tdSubject);
+//     tableRow.appendChild(tdTempo);
+//     tableRow.appendChild(tdNotes);
+//     // // Append the link to li
+//     tableRow.appendChild(link);
+//
+//   }
+//
+// }
 
-function getLog(){
-  let log;
-  if(localStorage.getItem('log') === null){
-    log = [];
-  } else {
-    log = JSON.parse(localStorage.getItem('log'))
-  }
-
-  for(let i = 0; i < log.length; i++){
-    const subjectData = log[i].subjectData;
-    const dateData = log[i].dateData;
-    const tempoData = log[i].tempoData;
-    const notesData = log[i].notesData;
-
-    //create tr element
-    const tableRow = document.createElement('tr');
-    tableBody.appendChild(tableRow);
-
-    //create td elemnt
-    const tdSubject = document.createElement('td');
-    const tdDate = document.createElement('td');
-    const tdTempo = document.createElement('td');
-    const tdNotes = document.createElement('td');
-
-    // Create text node and append to li
-
-    tdSubject.appendChild(document.createTextNode(subjectData));
-    tdDate.appendChild(document.createTextNode(dateData));
-    tdTempo.appendChild(document.createTextNode(tempoData));
-    tdNotes.appendChild(document.createTextNode(notesData));
-
-    // // Create new link element
-    const link = document.createElement('td');
-    // Add class
-    link.className = 'delete-item secondary-content';
-    // // Add icon html
-    link.innerHTML = '<i class="fa fa-remove"></i>';
-
-     // Append li to ul
-    tableRow.appendChild(tdDate);
-    tableRow.appendChild(tdSubject);
-    tableRow.appendChild(tdTempo);
-    tableRow.appendChild(tdNotes);
-    // // Append the link to li
-    tableRow.appendChild(link);
-
-  }
-
-}
-
-//remove from local storage
-function removeFromLocalStorage(logItem){
-  let log;
-  if(localStorage.getItem('log') === null){
-    log = [];
-  } else {
-    log = JSON.parse(localStorage.getItem('log'))
-  }
-
-  let retrievedLog;
-
-  for (i = 0; i < log.length; i++){
-    retrievedLog = `${log[i].dateData}${log[i].subjectData}${log[i].tempoData}${log[i].notesData}`;
-      if (logItem.textContent === retrievedLog){
-
-        log.splice(i ,1);
-      }
-
-
-  }
-
-  localStorage.setItem('log', JSON.stringify(log));
-}
+// //remove from local storage
+// function removeFromLocalStorage(logItem){
+//   let log;
+//   if(localStorage.getItem('log') === null){
+//     log = [];
+//   } else {
+//     log = JSON.parse(localStorage.getItem('log'))
+//   }
+//
+//   let retrievedLog;
+//
+//   for (i = 0; i < log.length; i++){
+//     retrievedLog = `${log[i].dateData}${log[i].subjectData}${log[i].tempoData}${log[i].notesData}`;
+//       if (logItem.textContent === retrievedLog){
+//
+//         log.splice(i ,1);
+//       }
+//
+//
+//   }
+//
+//   localStorage.setItem('log', JSON.stringify(log));
+// }
